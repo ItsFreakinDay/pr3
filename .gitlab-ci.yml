@@ -1,0 +1,17 @@
+stages:
+  - test
+  - deploy
+
+test_job:
+  stage: test
+  script:
+    - python3 -m unittest discover tests
+
+deploy_job:
+  stage: deploy
+  only:
+    - main  # Запускать только для ветки main
+  script:
+    - cd /path/to/project
+    - git pull origin main
+    - systemctl restart app
